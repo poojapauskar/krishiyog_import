@@ -62,26 +62,43 @@ if(isset($_FILES['file']['name'])){
             echo "</br>";
             $stack = ltrim($stack, ';');
 			print_r($stack);
-
-            $url_search = 'https://krishi-udyog.herokuapp.com/import_category_and_subcategory/?access_token=Mj4hcB7gEF9DZeeHw7XMUcfwfj4n6c';
-			$options_search = array(
-			  'http' => array(
-			    'header'  => array(
-			                  'STRING: '.$stack,
-			                ),
-			    'method'  => 'GET',
-			  ),
-			);
-			$context_search = stream_context_create($options_search);
-			$output_search = file_get_contents($url_search, false,$context_search);
-			
-			$arr_search = json_decode($output_search,true);
+            
+            if($_POST['import_remove'] == "Import"){
+		            $url_search = 'https://krishi-udyog.herokuapp.com/import_category_and_subcategory/?access_token=Mj4hcB7gEF9DZeeHw7XMUcfwfj4n6c';
+					$options_search = array(
+					  'http' => array(
+					    'header'  => array(
+					                  'STRING: '.$stack,
+					                ),
+					    'method'  => 'GET',
+					  ),
+					);
+					$context_search = stream_context_create($options_search);
+					$output_search = file_get_contents($url_search, false,$context_search);
+					
+					$arr_search = json_decode($output_search,true);
+            }
+            if($_POST['import_remove'] == "Remove"){
+            	    $url_remove = 'https://krishi-udyog.herokuapp.com/remove_subcategory_using_excel/?access_token=Mj4hcB7gEF9DZeeHw7XMUcfwfj4n6c';
+					$options_remove = array(
+					  'http' => array(
+					    'header'  => array(
+					                  'STRING: '.$stack,
+					                ),
+					    'method'  => 'GET',
+					  ),
+					);
+					$context_remove = stream_context_create($options_remove);
+					$output_remove = file_get_contents($url_remove, false,$context_remove);
+					
+					$arr_remove = json_decode($output_remove,true);
+            }
 
 
 		}
 		
 		echo '</table></center>';
-      /*  header("Location: admin_page.php");*/
+        header("Location: home.php");
         
        
 		
