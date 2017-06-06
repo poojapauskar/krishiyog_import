@@ -1,5 +1,13 @@
 <?php
 session_start();
+
+
+if($_SESSION['krishi_login']==1){
+}else{
+ echo "<script>location='index.php'</script>";	
+}
+
+
 /** Set default timezone (will throw a notice otherwise) */
 date_default_timezone_set('Asia/Kolkata');
 
