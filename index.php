@@ -27,7 +27,7 @@ function show_wait_msg ()
 
 session_start();
 if($_POST['username'] != '' && $_POST['password'] != ''){
-  if($_POST['username'] == 'test' && $_POST['password'] == 'bitjini'){
+  if($_POST['username'] == 'admin' && $_POST['password'] == 'admin@krishiyog'){
   	  $_SESSION['krishi_login']=1;
       echo "<script>location='home.php'</script>";
   }
