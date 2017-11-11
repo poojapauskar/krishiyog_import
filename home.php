@@ -128,9 +128,9 @@ function set2(){
     Fees
     </button>
 
-  <!-- <button onClick="window.location.href = 'produce.php';" class="btn btn-success" style="color:white;background-color:green;width:100px;height:40px">
+  <button onClick="window.location.href = 'produce.php';" class="btn btn-success" style="color:white;background-color:green;width:100px;height:40px">
     Produce
-    </button> -->
+    </button>
 
   <br><br>
 

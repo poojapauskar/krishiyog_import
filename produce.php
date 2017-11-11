@@ -9,12 +9,12 @@ if($_SESSION['krishi_login']==1){
 
 <?php
 
-/*if(isset($_POST['pk'])){
+if(isset($_POST['pk_delete'])){
       $url_delete = 'https://krishi-udyog.herokuapp.com/delete_a_produce/';
       $options_delete = array(
         'http' => array(
           'header'  => array(
-                  'PRODUCE-ID: '.$_POST['pk'],
+                  'PRODUCE-ID: '.$_POST['pk_delete'],
                 ),
           'method'  => 'GET',
         ),
@@ -23,7 +23,7 @@ if($_SESSION['krishi_login']==1){
       $output_delete = file_get_contents($url_delete, false,$context_delete);
 
       $arr_delete = json_decode($output_delete,true);
-}*/
+}
 
 ?>
 
@@ -109,7 +109,7 @@ for ($x = 0; $x < count($arr3['data']); $x++) { ?>
     <td><?php echo $arr3['data'][$x]['location_details']['city']; ?></td>
     <td>
         <form method="post" action="produce.php">
-            <input type="hidden" name="pk" value="$arr3['data'][$x]['product_details']['pk'];"></input>
+            <input type="hidden" name="pk_delete" value="<?php echo $arr3['data'][$x]['product_details']['pk']; ?>"></input>
             <button type="button" onclick="myFunction('<?php echo $x ?>');" style="margin-top:6% !important">Delete</button>
             <div style="visibility:hidden">
              <button class="hid1" name="submit<?php echo $x ?>" id="submit<?php echo $x ?>" type="submit"><button>
