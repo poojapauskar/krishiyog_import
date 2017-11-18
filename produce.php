@@ -6,7 +6,14 @@ if($_SESSION['krishi_login']==1){
 }
 ?>
 
-
+<body>
+<head>
+<meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
 <?php
 
 if(isset($_POST['pk_delete'])){
@@ -87,6 +94,7 @@ tbody {
   <!--   <th>Description</th> -->
     <th>Location</th>
     <th>Action</th>
+    <th>Details</th>
   </tr>
 </thead>
 <tbody>
@@ -116,6 +124,71 @@ for ($x = 0; $x < count($arr3['data']); $x++) { ?>
             </div>
         </form>
     </td>
+  
+  <td>
+  <!-- Trigger the modal with a button -->
+  <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal<?php echo $x ?>">Details</button>
+  </td>
+  <!-- Modal -->
+  <div class="modal fade" id="myModal<?php echo $x ?>" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+         
+         <div style="text-align:center">
+          <img style="max-height:250px;" src="<?php echo $arr3['data'][$x]['image_details']; ?>"></img>
+         </div>
+
+          <h3 style="font-weight:bold;text-align:center">Produce Details</h3>
+          <p><b><b>Category</b></b> : <?php echo $arr3['data'][$x]['category']['c_type']; ?></p>
+          <p><b>Sub Category</b> : <?php echo $arr3['data'][$x]['sub_category_details']['sc_type']; ?></p>
+          <p><b>Product Type</b> : <?php echo $arr3['data'][$x]['product_details']['p_type']; ?></p>
+          <p><b>Quality</b> : <?php echo $arr3['data'][$x]['product_details']['quality']; ?></p>
+          <p><b>Quantity</b> : <?php echo $arr3['data'][$x]['product_details']['quantity']." ".$arr3['data'][$x]['product_details']['q_unit']; ?></p>
+          <p><b>Available Quantity</b> : <?php echo $arr3['data'][$x]['product_details']['available_quantity']." ".$arr3['data'][$x]['product_details']['aq_unit']; ?></p>
+          <p><b>Minimum Order Quantity</b> : <?php echo $arr3['data'][$x]['product_details']['min_order_quantity']." ".$arr3['data'][$x]['product_details']['mq_unit']; ?></p>
+          <p><b>Rate</b> : <?php echo $arr3['data'][$x]['product_details']['rate']." ".$arr3['data'][$x]['product_details']['r_unit']; ?></p>
+          <p><b>Availability Date</b> : <?php echo $arr3['data'][$x]['product_details']['availability_date']; ?></p>
+          <p><b>Available Upto</b> : <?php echo $arr3['data'][$x]['product_details']['available_upto']; ?></p>
+          <p><b>Description</b> : <?php echo $arr3['data'][$x]['product_details']['description']; ?></p>
+          <p><b>CGST</b> : <?php echo $arr3['data'][$x]['product_details']['cgst']; ?></p>
+          <p><b>SGST</b> : <?php echo $arr3['data'][$x]['product_details']['sgst']; ?></p>
+          <p><b>IGST</b> : <?php echo $arr3['data'][$x]['product_details']['igst']; ?></p>
+          <p><b>GST Description</b> : <?php echo $arr3['data'][$x]['product_details']['gst_description']; ?></p>
+          <p><b>Chapter Head</b> : <?php echo $arr3['data'][$x]['product_details']['chap_head_subhead_tarrif']; ?></p>
+          <p><b>Water Source</b> : <?php echo $arr3['data'][$x]['product_details']['water_source']; ?></p>
+          <p><b>Type Of Farming</b> : <?php echo $arr3['data'][$x]['product_details']['type_of_farming']; ?></p>
+          
+          <h3 style="font-weight:bold;text-align:center">Location Details</h3>
+          <p><b>State</b> : <?php echo $arr3['data'][$x]['location_details']['state']; ?></p>
+          <p><b>District</b> : <?php echo $arr3['data'][$x]['category']['district']; ?></p>
+          <p><b>City</b> : <?php echo $arr3['data'][$x]['category']['city']; ?></p>
+          <p><b>Taluka</b> : <?php echo $arr3['data'][$x]['category']['taluka']; ?></p>
+          <p><b>Pin Code</b> : <?php echo $arr3['data'][$x]['category']['pin_code']; ?></p>
+
+          <h3 style="font-weight:bold;text-align:center">Seller Details</h3>
+          <p><b>Name</b> : <?php echo $arr3['data'][$x]['seller']['name']; ?></p>
+          <p><b>Email</b> : <?php echo $arr3['data'][$x]['seller']['email']; ?></p>
+          <p><b>Mobile</b> : <?php echo $arr3['data'][$x]['seller']['mobile']; ?></p>
+         
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  
+</div>
+
+
+
 <?php  } 
 ?>
 <tbody>  
@@ -132,3 +205,5 @@ function myFunction(x) {
     }
 }
 </script>
+
+</body>

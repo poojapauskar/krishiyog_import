@@ -49,7 +49,39 @@ tbody {
 
 <a href="home.php">Back</a>
 
-<h3 style="text-align:center;margin-top:5%">Verified Subcategories</h3>
+<script type="text/javascript">
+    
+function set1(){
+    document.getElementById("import_remove").value = "Import";
+};
+    
+function set2(){
+  document.getElementById("import_remove").value = "Remove";
+};
+
+
+</script>
+<form enctype="multipart/form-data" action="upload.php" method="post" >
+  
+  <!-- <label style="margin-left:2%" class="form-label span3" for="file">Import Students</label><br><br>
+   -->
+   <input style="margin-top:2%" type="file" name="file" id="file" required />
+   <input name="import_remove" id="import_remove" type="hidden"></input>
+  
+  
+  <br><br>
+  <button onClick="set1()" id="imp_btn" class="btn btn-success" style="color:white;background-color:green;width:100px;height:40px" type="submit">
+    Import
+    </button>
+
+  <button onClick="set2()" id="rem_btn" class="btn btn-success" style="color:white;background-color:green;width:100px;height:40px" type="submit">
+    Remove
+    </button>
+
+
+</form>
+
+<h3 style="text-align:center;margin-top:5%">Admin Added Categories</h3>
 <table align="center">
 <thead>
   <tr>

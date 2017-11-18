@@ -86,42 +86,13 @@ tbody {
 
 
 </style>
-<script type="text/javascript">
-    
-function set1(){
-    document.getElementById("import_remove").value = "Import";
-};
-    
-function set2(){
-	document.getElementById("import_remove").value = "Remove";
-};
 
-
-</script>
 <a href="logout.php">Logout</a>
-
-<form enctype="multipart/form-data" action="upload.php" method="post" >
-  
-  <!-- <label style="margin-left:2%" class="form-label span3" for="file">Import Students</label><br><br>
-   -->
-   <input style="margin-top:2%" type="file" name="file" id="file" required />
-   <input name="import_remove" id="import_remove" type="hidden"></input>
-  
-  
-  <br><br>
-  <button onClick="set1()" id="imp_btn" class="btn btn-success" style="color:white;background-color:green;width:100px;height:40px" type="submit">
-    Import
-    </button>
-
-  <button onClick="set2()" id="rem_btn" class="btn btn-success" style="color:white;background-color:green;width:100px;height:40px" type="submit">
-    Remove
-    </button>
-
-
-</form>
+<br>
+<br>
 
   <button onClick="window.location.href = 'verified.php';" class="btn btn-success" style="color:white;background-color:green;width:205px;height:40px">
-    Verfied Sub Categories
+    Admin Added Categories
     </button>
 
   <button onClick="window.location.href = 'fees.php';" class="btn btn-success" style="color:white;background-color:green;width:100px;height:40px">
@@ -134,6 +105,7 @@ function set2(){
 
   <br><br>
 
+<h2>User Added Categories</h2>
 <table>
 <thead>
   <tr>
@@ -151,7 +123,14 @@ for ($x = 0; $x < count($arr3['results']); $x++) { ?>
   <tr>
     <td><?php echo $arr3['results'][$x]['category']; ?></td>
     <td><?php echo $arr3['results'][$x]['sub_category']; ?></td>
-    <td><?php echo $arr3['results'][$x]['approved']; ?></td>
+
+    <?php if($arr3['results'][$x]['approved'] == "1"){ ?>
+      <td>Yes</td>
+    <?php } ?>
+    <?php if($arr3['results'][$x]['approved'] == "0"){ ?> 
+      <td>No</td>
+    <?php } ?>
+
     <td>
         <form method="post" action="home.php">
             <input type="hidden" name="pk_approve" value="<?php echo $arr3['results'][$x]['pk']; ?>"></input>
