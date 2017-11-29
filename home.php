@@ -47,6 +47,26 @@ if(isset($_POST['approve_btn'])){
 ?>
 
 <?php
+
+if(isset($_POST['disapprove_btn'])){
+      $url_approve = 'https://krishi-udyog.herokuapp.com/disapprove_unverified_subcategory/';
+      $options_approve = array(
+        'http' => array(
+          'header'  => array(
+                  'PK: '.$_POST['pk_disapprove'],
+                ),
+          'method'  => 'GET',
+        ),
+      );
+      $context_approve = stream_context_create($options_approve);
+      $output_approve = file_get_contents($url_approve, false,$context_approve);
+
+      $arr_approve = json_decode($output_approve,true);
+}
+
+?>
+
+<?php
 $url3 = 'https://krishi-udyog.herokuapp.com/get_unverified_subcategories/';
 $options3 = array(
   'http' => array(
@@ -132,11 +152,21 @@ for ($x = 0; $x < count($arr3['results']); $x++) { ?>
     <?php } ?>
 
     <td>
+      <?php if($arr3['results'][$x]['approved'] == "0"){ ?> 
         <form method="post" action="home.php">
             <input type="hidden" name="pk_approve" value="<?php echo $arr3['results'][$x]['pk']; ?>"></input>
              <button name="approve_btn" id="approve_btn" type="submit">Approve</button>
             </div>
         </form>
+      <?php } ?>
+      <?php if($arr3['results'][$x]['approved'] == "1"){ ?>
+        <form method="post" action="home.php">
+            <input type="hidden" name="pk_disapprove" value="<?php echo $arr3['results'][$x]['pk']; ?>"></input>
+             <button name="disapprove_btn" id="disapprove_btn" type="submit">Disapprove</button>
+            </div>
+        </form>
+      <?php } ?>
+
     </td>
     <td>
         <form method="post" action="home.php">
