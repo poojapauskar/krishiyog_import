@@ -63,7 +63,7 @@ th, td {
 th{font-size: 18px}
 td{font-size: 15px}
 
-thead, tbody { display: block; }
+thead, tbody { display: table-header-group; }
 
 tbody {
     height: 433px;       /* Just for the demo          */

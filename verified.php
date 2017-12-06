@@ -7,6 +7,67 @@ if($_SESSION['krishi_login']==1){
 ?>
 
 <?php
+
+if(isset($_POST['update_commission'])){
+      $url_commission = 'https://krishi-udyog.herokuapp.com/update_commission/';
+      $options_commission = array(
+        'http' => array(
+          'header'  => array(
+                  'PK: '.$_POST['pk_commission'],
+                  'COMMISSION: '.$_POST['commission'],
+                ),
+          'method'  => 'GET',
+        ),
+      );
+      $context_commission = stream_context_create($options_commission);
+      $output_commission = file_get_contents($url_commission, false,$context_commission);
+
+      $arr_commission = json_decode($output_commission,true);
+}
+
+?>
+
+<?php
+
+if(isset($_POST['update_fees'])){
+      $url_fees = 'https://krishi-udyog.herokuapp.com/fees/';
+      $options_fees = array(
+        'http' => array(
+          'header'  => array(
+                  'FEES: '.$_POST['fees'],
+                ),
+          'method'  => 'GET',
+        ),
+      );
+      $context_fees = stream_context_create($options_fees);
+      $output_fees = file_get_contents($url_fees, false,$context_fees);
+
+      $arr_fees = json_decode($output_fees,true);
+}
+
+?>
+
+<?php
+$url3 = 'https://krishi-udyog.herokuapp.com/get_fees/';
+$options3 = array(
+  'http' => array(
+    'method'  => 'GET',
+  ),
+);
+$context3 = stream_context_create($options3);
+$output3 = file_get_contents($url3, false,$context3);
+/*echo $output3;*/
+$arr3 = json_decode($output3,true);
+
+if($arr3['fees'] == ""){
+  $f1= "0%";
+}else{
+  $f1= $arr3['fees']."%";
+}
+
+?>
+
+<?php
 $url3 = 'https://krishi-udyog.herokuapp.com/get_verified_subcategories/';
 $options3 = array(
   'http' => array(
@@ -81,13 +142,22 @@ function set2(){
 
 </form>
 
+<h4>Fees: <?php echo $f1; ?></h4>
+
+<form method="post" action="verified.php">
+            <input type="text" name="fees" value="" placeholder="0-100 %"></input>
+             <button name="update_fees" id="update_fees" type="submit">Update Fees</button>
+            </div>
+</form>
+
 <h3 style="text-align:center;margin-top:5%">Admin Added Categories</h3>
 <table align="center">
 <thead>
   <tr>
     <th>Category</th>
     <th>Sub Category</th>
-    <!-- <th>Action</th> -->
+    <th>Commission</th>
+    <th>Update Commission</th>
   </tr>
 </thead>
 <tbody>
@@ -97,6 +167,15 @@ for ($x = 0; $x < count($arr3['results']); $x++) { ?>
   <tr>
     <td><?php echo $arr3['results'][$x]['category']; ?></td>
     <td><?php echo $arr3['results'][$x]['sub_category']; ?></td>
+    <td><?php echo $arr3['results'][$x]['commission']; echo " %"; ?></td>
+    <td>
+          <form method="post" action="verified.php">
+                 <input type="hidden" name="pk_commission" value="<?php echo $arr3['results'][$x]['pk']; ?>"></input>
+                  <input type="text" style="width:50%" name="commission" value="" placeholder="0-100 %" required></input>
+                   <button name="update_commission" id="update_commission" type="submit">Update Commission</button>
+                  </div>
+          </form>
+    </td>
     <!-- <td>
     <form method="post" action="home.php">
         <input type="hidden" name="pk" value="<?php echo $arr3['results'][$x]['pk']; ?>"></input>

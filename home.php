@@ -8,6 +8,27 @@ if($_SESSION['krishi_login']==1){
 
 <?php
 
+if(isset($_POST['update_commission'])){
+      $url_commission = 'https://krishi-udyog.herokuapp.com/update_commission/';
+      $options_commission = array(
+        'http' => array(
+          'header'  => array(
+                  'PK: '.$_POST['pk_commission'],
+                  'COMMISSION: '.$_POST['commission'],
+                ),
+          'method'  => 'GET',
+        ),
+      );
+      $context_commission = stream_context_create($options_commission);
+      $output_commission = file_get_contents($url_commission, false,$context_commission);
+
+      $arr_commission = json_decode($output_commission,true);
+}
+
+?>
+
+<?php
+
 if(isset($_POST['pk'])){
       $url_delete = 'https://krishi-udyog.herokuapp.com/delete_subcategory/';
       $options_delete = array(
@@ -115,9 +136,9 @@ tbody {
     Admin Added Categories
     </button>
 
-  <button onClick="window.location.href = 'fees.php';" class="btn btn-success" style="color:white;background-color:green;width:100px;height:40px">
+ <!--  <button onClick="window.location.href = 'fees.php';" class="btn btn-success" style="color:white;background-color:green;width:100px;height:40px">
     Fees
-    </button>
+    </button> -->
 
   <button onClick="window.location.href = 'produce.php';" class="btn btn-success" style="color:white;background-color:green;width:100px;height:40px">
     Produce
@@ -131,8 +152,10 @@ tbody {
   <tr>
     <th>Category</th>
     <th>Sub Category</th>
+    <th>Commission</th>
     <th>Approved</th>
     <th>Approve</th>
+    <th>Update Commission</th>
     <th>Delete</th>
   </tr>
 </thead>
@@ -143,6 +166,7 @@ for ($x = 0; $x < count($arr3['results']); $x++) { ?>
   <tr>
     <td><?php echo $arr3['results'][$x]['category']; ?></td>
     <td><?php echo $arr3['results'][$x]['sub_category']; ?></td>
+    <td><?php echo $arr3['results'][$x]['commission']; echo " %"; ?></td>
 
     <?php if($arr3['results'][$x]['approved'] == "1"){ ?>
       <td>Yes</td>
@@ -167,6 +191,14 @@ for ($x = 0; $x < count($arr3['results']); $x++) { ?>
         </form>
       <?php } ?>
 
+    </td>
+    <td>
+          <form method="post" action="home.php">
+                 <input type="hidden" name="pk_commission" value="<?php echo $arr3['results'][$x]['pk']; ?>"></input>
+                  <input type="text" style="width:50%" name="commission" value="" placeholder="0-100 %" required></input>
+                   <button name="update_commission" id="update_commission" type="submit">Update Commission</button>
+                  </div>
+          </form>
     </td>
     <td>
         <form method="post" action="home.php">
