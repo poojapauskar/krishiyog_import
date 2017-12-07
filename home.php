@@ -195,7 +195,7 @@ for ($x = 0; $x < count($arr3['results']); $x++) { ?>
     <td>
           <form method="post" action="home.php">
                  <input type="hidden" name="pk_commission" value="<?php echo $arr3['results'][$x]['pk']; ?>"></input>
-                  <input type="number" min="-100" max="100" style="width:50%" name="commission" value="" placeholder="0-100 %" required></input>
+                  <input type="number" min="-100" max="100" style="width:50%" name="commission" value="" required></input>
                    <button name="update_commission" id="update_commission" type="submit">Update Commission</button>
                   </div>
           </form>
