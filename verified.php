@@ -144,11 +144,30 @@ function set2(){
 
 <h4>Fees: <?php echo $f1; ?></h4>
 
+<script>
+function myFunction2() {
+  /*alert('hi');*/
+    var s_f= document.getElementById('fees').value;
+    var rgx_f = /[^\d.]|\.(?=.*\.)/g;
+    var x_f= rgx_f.test(s_f);
+   
+    if(x_f == true){
+        alert('Enter value between 00.00 - 99.99');
+      
+    }
+    else{
+      document.getElementById("update_fees").click();
+    }
+}
+</script>
+
+
 <form method="post" action="verified.php">
-            <input type="number" min="00.00" max="99.99" step="0.01" name="fees" value="" placeholder="00.00-99.99 %"></input>
-             <button name="update_fees" id="update_fees" type="submit">Update Fees</button>
+            <input type="number" min="00.00" max="99.99" step="0.01" name="fees" id="fees" value="" placeholder="00.00-99.99 %"></input>
+             <button style="display:none;visibility:hidden" name="update_fees" id="update_fees" type="submit">Update Fees</button>
             </div>
 </form>
+<button onclick="myFunction2()">Update Fees</button>
 
 <h3 style="text-align:center;margin-top:5%">Admin Added Categories</h3>
 <table align="center">
@@ -169,12 +188,32 @@ for ($x = 0; $x < count($arr3['results']); $x++) { ?>
     <td><?php echo $arr3['results'][$x]['sub_category']; ?></td>
     <td><?php echo $arr3['results'][$x]['commission']; echo " %"; ?></td>
     <td>
+
+
+<script>
+function myFunction3(k) {
+    var s_c= document.getElementById('commission'+k).value;
+    var rgx_c = /[^\d.]|\.(?=.*\.)/g;
+    var x_c= rgx_c.test(s_c);
+     /*alert(x); */
+   
+    if(x_c == true){
+      /*alert('true');*/
+        alert('Enter value between 00.00 - 99.99');
+      
+    }
+    else{
+      document.getElementById("update_commission"+k).click();
+    }
+}
+</script>
           <form method="post" action="verified.php">
                  <input type="hidden" name="pk_commission" value="<?php echo $arr3['results'][$x]['pk']; ?>"></input>
-                  <input type="number" min="00.00" max="99.99" step="0.01" style="width:50%" name="commission" value="" placeholder="00.00-99.99 %" required></input>
-                   <button name="update_commission" id="update_commission" type="submit">Update Commission</button>
+                  <input type="number" min="00.00" max="99.99" step="0.01" style="width:50%" id="commission<?php echo $x; ?>" name="commission" value="" placeholder="00.00-99.99 %" required></input>
+                   <button style="display:none;visibility:hidden" name="update_commission" id="update_commission<?php echo $x; ?>" type="submit">Update Commission</button>
                   </div>
           </form>
+          <button onclick="myFunction3('<?php echo $x; ?>')">Update Commission</button>
     </td>
     <!-- <td>
     <form method="post" action="home.php">

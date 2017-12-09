@@ -194,17 +194,11 @@ for ($x = 0; $x < count($arr3['results']); $x++) { ?>
     </td>
     <td>
 
-<script type="text/javascript">
-  function validate() {
-    s= document.getElementById('commission');
-    var rgx = /^[0-9]*\.?[0-9]*$/;
-    alert(s.match(rgx));
-}
-</script>
+
 
 <script>
-function myFunction1() {
-    var s= document.getElementById('commission').value;
+function myFunction1(t) {
+    var s= document.getElementById('commission'+t).value;
     var rgx = /[^\d.]|\.(?=.*\.)/g;
     var x= rgx.test(s);
      /*alert(x); */
@@ -214,29 +208,18 @@ function myFunction1() {
         alert('Enter value between 00.00 - 99.99');
       
     }
-    /*else if(s < 00.00 || s > 99.99){
-       alert('Enter value between 00.00 - 99.99');
-    }*/
     else{
-      document.getElementById("update_commission").click();
+      document.getElementById("update_commission"+t).click();
     }
-
-    /* }else{
-      alert('false');
-       alert('Enter value between 00.00 - 99.99');
-       event.stopPropagation();
-    }
-    /*alert("hello");*/
-   /* alert(/^[0-9]*\.?[0-9]*$/.test('abc'));*/
 }
 </script>
           <form method="post" action="home.php">
                  <input type="hidden" name="pk_commission" value="<?php echo $arr3['results'][$x]['pk']; ?>"></input>
-                  <input type="number" pattern="^[0-9]([.])?$" min="00.00" max="99.99" step="0.01" style="width:50%" id="commission" name="commission" value="" placeholder="00.00-99.99 %" required></input>
-                   <button style="display:none;visibility:hidden" onclick="myFunction1()" name="update_commission" id="update_commission" type="submit"></button>
+                  <input type="number" pattern="^[0-9]([.])?$" min="00.00" max="99.99" step="0.01" style="width:50%" id="commission<?php echo $x; ?>" name="commission" value="" placeholder="00.00-99.99 %" required></input>
+                   <button style="display:none;visibility:hidden" name="update_commission" id="update_commission<?php echo $x; ?>" type="submit"></button>
                   </div>
           </form>
-          <button onclick="myFunction1()">Update Commission</button>
+          <button onclick="myFunction1('<?php echo $x; ?>')">Update Commission</button>
                    
     </td>
     <td>
